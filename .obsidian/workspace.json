@@ -1,39 +1,76 @@
 {
   "main": {
-    "id": "e5c6b088ce080a53",
+    "id": "8c95162f839d2eb0",
     "type": "split",
     "children": [
       {
-        "id": "63340bb811b2d1b0",
+        "id": "398e22303ca3c832",
         "type": "tabs",
         "children": [
           {
-            "id": "033601025fcc8fed",
+            "id": "e64670229ca3cc14",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "test.md",
+                "file": "demo/chapter_1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "46cd612f73e8eff9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "demo/demo_1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "607040186a25f32d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "demo/demo_2.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ec5a1829dad9bce2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "tmp/temp.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "c4afa1d3fb71256e",
+    "id": "0bd171c5ee9f2174",
     "type": "split",
     "children": [
       {
-        "id": "74447a125757f1f6",
+        "id": "5375d90d04356201",
         "type": "tabs",
         "children": [
           {
-            "id": "d607f47db89cf9c0",
+            "id": "b5ee1cfd79fbe5c6",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -43,7 +80,7 @@
             }
           },
           {
-            "id": "abc48915df64a658",
+            "id": "26a1bcd708d7298b",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -58,7 +95,7 @@
             }
           },
           {
-            "id": "824487d45b7bd987",
+            "id": "0648efc1bbe5358b",
             "type": "leaf",
             "state": {
               "type": "starred",
@@ -69,23 +106,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
-    "id": "c135b4c34eba0dd8",
+    "id": "50970b2290d25653",
     "type": "split",
     "children": [
       {
-        "id": "0ce56fe5dc822179",
+        "id": "64c80d5c16afb952",
         "type": "tabs",
         "children": [
           {
-            "id": "8806f3850ad6741a",
+            "id": "15c058c8182caff2",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "test.md",
+                "file": "demo/demo_2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,19 +134,19 @@
             }
           },
           {
-            "id": "d9bedbed89dc863a",
+            "id": "3051015a7ba10d90",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "test.md",
+                "file": "demo/demo_2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "7ca27c9ba9a8e3a6",
+            "id": "d4d89ec9c3c4cf09",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -120,12 +157,12 @@
             }
           },
           {
-            "id": "6512f682c1185939",
+            "id": "8e57b9d7d708366f",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "test.md"
+                "file": "demo/demo_2.md"
               }
             }
           }
@@ -136,13 +173,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "033601025fcc8fed",
+  "active": "607040186a25f32d",
   "lastOpenFiles": [
     "SUMMARY.md",
-    "test.md",
-    "chapter_2.md",
+    "demo/demo_2.md",
+    "tmp/temp.md",
+    "demo/demo_1.md",
+    "demo/chapter_2.md",
+    "demo/chapter_1.md",
     "chapter_1.md",
-    "tes_2.md",
-    "test_2.md"
+    "demotest.md",
+    "demochapter_2.md",
+    "demo/demo.md"
   ]
 }
