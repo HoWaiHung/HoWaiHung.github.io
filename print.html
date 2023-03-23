@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="demo/chapter_1.html">Chapter 1</a></li><li class="chapter-item expanded affix "><a href="demo/chapter_2.html">Chapter 2</a></li><li class="chapter-item expanded affix "><a href="demo/demo_1.html">Demo_1</a></li><li class="chapter-item expanded affix "><a href="demo/demo_2.html">Demo_2</a></li><li class="chapter-item expanded affix "><li class="part-title">TMP</li><li class="chapter-item expanded affix "><li class="part-title">LINUX</li><li class="chapter-item expanded affix "><a href="linux/archlinux/2023.html">2023</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">LINUX</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> ArchLinux</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="linux/archlinux/2023.html"><strong aria-hidden="true">1.1.</strong> 2023</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">TMP</li><li class="chapter-item expanded affix "><li class="part-title">DEMO</li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -132,27 +132,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-2"><a class="header" href="#chapter-2">Chapter 2</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><pre class="mermaid">    flowchart TD        
-    N0[&quot;TEST&quot;]
-    N1[&quot;DEMO&quot;]
-    N2[&quot;Node&quot;]
-
-
-    N0--data--&gt;N1
-      
-</pre>
-<div style="break-before: page; page-break-before: always;"></div><pre class="mermaid">    flowchart TD        
-    N0[&quot;TEST&quot;]
-    N1[&quot;DEMO&quot;]
-    N2[&quot;Node&quot;]
-
-
-    N0--data--&gt;N1
-      
-</pre>
-<div style="break-before: page; page-break-before: always;"></div><pre><code class="language-shell">mount [-t btrfs] -o subvol=/@ /dev/sdaX /mnt
+                        <ul>
+<li>Archlinux Desktop Recovery In Btrfs</li>
+</ul>
+<pre><code class="language-shell">--
+mount [-t btrfs] -o subvol=/@ /dev/sdaX /mnt
 arch-chroot /mnt 
 --
 mkinitcpio -p linux
@@ -161,6 +145,7 @@ exit
 --
 umount /mnt
 rebboot
+
 </code></pre>
 
                     </main>
