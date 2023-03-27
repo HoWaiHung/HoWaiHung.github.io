@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "others/Language.md",
+                "file": "linux/archlinux/2023.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SUMMARY.md",
+                "file": "linux/archlinux/2023.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "others/Language.md",
+                "file": "linux/archlinux/2023.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "others/Language.md",
+                "file": "linux/archlinux/2023.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "others/Language.md"
+                "file": "linux/archlinux/2023.md"
               }
             }
           }
@@ -160,15 +160,22 @@
   },
   "active": "331e0d78c2ec5deb",
   "lastOpenFiles": [
-    "SUMMARY.md",
+    "personal/ToolChain.md",
     "others/Language.md",
+    "SUMMARY.md",
+    "rust/RUNNER.md",
+    "rusr/RUNNER.md",
+    "rusr/RUN.md",
+    "rusr/Lan.md",
+    "rusr/Language.md",
+    "rusr",
+    "Language.md",
     "linux/archlinux/2023.md",
     "others/Langua",
     "others/Lan",
     "oth",
     "ai/GPT.md",
     "().md",
-    "personal/ToolChain.md",
     "personal",
     "tmp/temp.md",
     "temp.md",
