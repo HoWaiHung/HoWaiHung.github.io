@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Runner - HoWaiHung</title>
+        <title>int - HoWaiHung</title>
 
 
         <!-- Custom HTML head -->
@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">LINUX</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> ArchLinux</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../linux/archlinux/2023.html"><strong aria-hidden="true">1.1.</strong> 2023</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">OTHER</li><li class="chapter-item expanded "><a href="../others/Language.html"><strong aria-hidden="true">2.</strong> Language</a></li><li class="chapter-item expanded "><a href="../rust/RUNNER.html" class="active"><strong aria-hidden="true">3.</strong> Runner</a></li><li class="chapter-item expanded affix "><li class="part-title">TMP</li><li class="chapter-item expanded affix "><li class="part-title">DEMO</li><li class="chapter-item expanded "><a href="../demo/chapter_1.html"><strong aria-hidden="true">4.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="../demo/chapter_2.html"><strong aria-hidden="true">5.</strong> Chapter 2</a></li><li class="chapter-item expanded "><a href="../demo/demo_1.html"><strong aria-hidden="true">6.</strong> Demo_1</a></li><li class="chapter-item expanded "><a href="../demo/demo_2.html"><strong aria-hidden="true">7.</strong> Demo_2</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">LINUX</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> ArchLinux</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../linux/archlinux/2023.html"><strong aria-hidden="true">1.1.</strong> 2023 Usage</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Debian</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> 2023</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Ubuntu</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> 2023</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Fedora</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">4.1.</strong> 2023</div></li></ol></li><li class="chapter-item expanded "><li class="part-title">WINDOWS</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Scoop</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../windows/scoop.html"><strong aria-hidden="true">5.1.</strong> init</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> WSL</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../windows/wsl.html" class="active"><strong aria-hidden="true">6.1.</strong> int</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">OTHER</li><li class="chapter-item expanded "><a href="../others/Language.html"><strong aria-hidden="true">7.</strong> Language</a></li><li class="chapter-item expanded "><a href="../rust/rust_runner.html"><strong aria-hidden="true">8.</strong> Runner</a></li><li class="chapter-item expanded affix "><li class="part-title">TMP</li><li class="chapter-item expanded "><a href="../tmp/temp.html"><strong aria-hidden="true">9.</strong> temp</a></li><li class="chapter-item expanded affix "><li class="part-title">DEMO</li><li class="chapter-item expanded "><a href="../demo/chapter_1.html"><strong aria-hidden="true">10.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="../demo/chapter_2.html"><strong aria-hidden="true">11.</strong> Chapter 2</a></li><li class="chapter-item expanded "><a href="../demo/demo_1.html"><strong aria-hidden="true">12.</strong> Demo_1</a></li><li class="chapter-item expanded "><a href="../demo/demo_2.html"><strong aria-hidden="true">13.</strong> Demo_2</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -153,21 +153,94 @@
 
                 <div id="content" class="content">
                     <main>
-                        <pre><pre class="playground"><code class="language-rust editable edition2021"><span class="boring">fn main() {
-</span>    let x = 5;
-    let y = 6;
-    println!(&quot;{}&quot;, x + y);
-<span class="boring">}</span></code></pre></pre>
+                        <pre><code># Install Docker on Windows (WSL) without Docker Desktop
+# https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+1.Configure a non-root user
+2.Configure admin (sudo) access for the non-root user
+3.Set default user
+when you launch WSL, you are still root, then set your new user as the default.
+4.Update/upgrade packages and test network connectivity
+- Network issues?
+5.Prepare for Docker installation
+- Remove residue
+- Install dependencies
+6.Install Docker
+- Add user to docker group
+- Sharing dockerd: choose a common ID for the docker group
+7.(Optionally) prepare a shared directory
+- Configure dockerd to use the shared directory
+8.Launch dockerd
+- Launch script for dockerd
+- Passwordless launch of dockerd
+- Make sure $DOCKER_HOST is always set
+- Running docker from Windows
+9.A note on bind mounts: stay on the Linux filesystem
+
+
+# ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+
+$DOCKER_DISTRO = &quot;Debian&quot;
+function docker {
+    wsl -d $DOCKER_DISTRO docker -H unix:///mnt/wsl/shared-docker/docker.sock @Args
+}
+
+function Docker-Service {
+  Param ([string]$distro)
+  $DOCKER_DIR = &quot;/mnt/wsl/shared-docker&quot;
+  $DOCKER_SOCK = &quot;$DOCKER_DIR/docker.sock&quot;
+  wsl -d &quot;$distro&quot; sh -c &quot;[ -S '$DOCKER_SOCK' ]&quot;
+  if ($LASTEXITCODE) {
+    wsl -d &quot;$distro&quot; sh -c &quot;mkdir -pm o=,ug=rw $DOCKER_DIR ; chgrp docker $DOCKER_DIR&quot;
+    wsl -d &quot;$distro&quot; sh -c &quot;nohup sudo -b dockerd &lt; /dev/null &gt; $DOCKER_DIR/dockerd.log 2&gt;&amp;1&quot;
+  }
+}
+
+
+</code></pre>
+<pre><code>
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+
+# 开启 Hyper-v
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+
+  
+# 开启 wsl2
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+  
+
+# 虚拟机平台
+
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+
+
+# wsl2
+
+wsl --set-default-version 2
+
+# 更新内核
+
+wsl --update
+
+wsl --shutdown
+
+wsl --export ubuntu D:\wsl\ubuntu\ubuntu.tar
+
+wsl --export docker-desktop-data C:\wsl\docker-desktop-data\docker-desktop-data.tar
+
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../others/Language.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../windows/scoop.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../demo/chapter_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../others/Language.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -177,11 +250,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../others/Language.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../windows/scoop.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../demo/chapter_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../others/Language.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

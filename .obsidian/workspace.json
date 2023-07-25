@@ -76,6 +76,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "bf0839bb962f0783",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -160,11 +168,26 @@
   },
   "active": "331e0d78c2ec5deb",
   "lastOpenFiles": [
+    "rust/rust_runner.md",
+    "().md",
+    "SUMMARY.md",
+    "windows/scoop",
+    "wind",
+    "configs/css/auto-number-title.css",
+    "configs/css/auto-number-title.css.part",
+    "configs/css",
+    "configs",
+    "rust_runner.md",
+    "rurust_runner.md",
+    "windows/wsl.md",
+    "windows/scoop.md",
+    "mq/rabbitmq.md",
+    "database/elasticsearch.md",
+    "database",
+    "mq",
     "linux/archlinux/2023.md",
     "personal/ToolChain.md",
     "others/Language.md",
-    "SUMMARY.md",
-    "rust/RUNNER.md",
     "rusr/RUNNER.md",
     "rusr/RUN.md",
     "rusr/Lan.md",
@@ -172,26 +195,13 @@
     "rusr",
     "Language.md",
     "others/Langua",
-    "others/Lan",
-    "oth",
     "ai/GPT.md",
-    "().md",
-    "personal",
     "tmp/temp.md",
     "temp.md",
     "linx/temp.md",
     "linux/temp.md",
     "linux/archlin.md",
     "linux/a.md",
-    "demo/demo_2.md",
-    "linx",
-    "linux/archlinux",
-    "2023-02-16.md",
-    "demo/demo_1.md",
-    "demo/chapter_1.md",
-    "demo/chapter_2.md",
-    "chapter_1.md",
-    "demotest.md",
-    "demochapter_2.md"
+    "demo/demo_2.md"
   ]
 }
