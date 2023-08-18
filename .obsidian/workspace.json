@@ -4,31 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "c2b0d861f42e6ead",
+        "id": "53a71ee85c366ae3",
         "type": "tabs",
         "children": [
           {
-            "id": "331e0d78c2ec5deb",
+            "id": "1a6f9cfbe6a5f811",
             "type": "leaf",
             "state": {
+<<<<<<< ours
               "type": "markdown",
               "state": {
                 "file": "SUMMARY.md",
                 "mode": "source",
                 "source": false
               }
-            }
-          },
-          {
-            "id": "eac62f299968532b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "linux/archlinux/2023.md",
-                "mode": "source",
-                "source": false
-              }
+=======
+              "type": "empty",
+              "state": {}
+>>>>>>> theirs
             }
           }
         ]
@@ -78,7 +71,7 @@
             }
           },
           {
-            "id": "bf0839bb962f0783",
+            "id": "ea8cba864efd17e4",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -166,42 +159,83 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "331e0d78c2ec5deb",
+  "active": "b5ee1cfd79fbe5c6",
   "lastOpenFiles": [
-    "rust/rust_runner.md",
-    "().md",
-    "SUMMARY.md",
-    "windows/scoop",
-    "wind",
-    "configs/css/auto-number-title.css",
-    "configs/css/auto-number-title.css.part",
-    "configs/css",
-    "configs",
+<<<<<<< ours
+    "Web/Server",
+    "Web",
+    "_temp",
+    "Programing/Testing",
+    "Programing/rustrust_runner.md",
+    "Programing/rust_runner.md",
+    "Programrust_runner.md",
+    "Prorust_runner.md",
+    "Prust_runner.md",
     "rust_runner.md",
-    "rurust_runner.md",
+    "SUMMARY.md",
+    "Programing/rust/rust_runner.md",
+    "Programing/rust/packge.info",
+    "Programing/rust",
+    "Programing/python/packge.info",
+    "Programing/python",
+    "Programing/java/spring/packge.info",
+    "Programing/java/spring",
+    "Programing/java/packge.info",
+    "Middleware/elasticsearch.md",
+    "Middleware/MQ/rabbitmq.md",
+    "AI/GPT.md",
+    "_personal/ToolChain.md",
+    "Programing/PL/rust/rust_runner.md",
+    "OS/Windows/scoop.md",
+    "OS/Windows/wsl.md",
+    "OS/Linux/archlinux/usage.md",
+    "_others/language.md",
+    "_others_/language.md",
+    "OS/Linux/archli/usage.md",
+    "OS/Linux/usage.md",
+    "Wwsl.md",
+    "wsl.md",
+    "usage.md",
+    "scoop.md",
+    "OSwsl.md",
+    "_others/flowchart-2x.png"
+=======
     "windows/wsl.md",
     "windows/scoop.md",
+    "windows/scoop",
+    "wind",
+    "rust/rust_runner.md",
     "mq/rabbitmq.md",
+    "mq",
     "database/elasticsearch.md",
     "database",
-    "mq",
-    "linux/archlinux/2023.md",
+    "configs/css/auto-number-title.css",
+    "configs/css",
+    "configs",
+    "Language.md",
+    "SUMMARY.md",
     "personal/ToolChain.md",
+    "linux/archlinux/2023.md",
     "others/Language.md",
+    "rust/RUNNER.md",
     "rusr/RUNNER.md",
     "rusr/RUN.md",
     "rusr/Lan.md",
     "rusr/Language.md",
     "rusr",
-    "Language.md",
     "others/Langua",
+    "others/Lan",
     "ai/GPT.md",
+    "().md",
     "tmp/temp.md",
     "temp.md",
     "linx/temp.md",
     "linux/temp.md",
     "linux/archlin.md",
     "linux/a.md",
-    "demo/demo_2.md"
+    "demo/demo_2.md",
+    "2023-02-16.md",
+    "demo/demo_1.md"
+>>>>>>> theirs
   ]
 }
