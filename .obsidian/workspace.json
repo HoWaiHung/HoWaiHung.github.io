@@ -1,27 +1,18 @@
 {
   "main": {
-    "id": "8c95162f839d2eb0",
+    "id": "466e3c5499f5b40f",
     "type": "split",
     "children": [
       {
-        "id": "53a71ee85c366ae3",
+        "id": "b469b81766ab11b8",
         "type": "tabs",
         "children": [
           {
-            "id": "1a6f9cfbe6a5f811",
+            "id": "4f97af7bf382460b",
             "type": "leaf",
             "state": {
-<<<<<<< ours
-              "type": "markdown",
-              "state": {
-                "file": "SUMMARY.md",
-                "mode": "source",
-                "source": false
-              }
-=======
               "type": "empty",
               "state": {}
->>>>>>> theirs
             }
           }
         ]
@@ -30,15 +21,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "0bd171c5ee9f2174",
+    "id": "de8006ffcc100467",
     "type": "split",
     "children": [
       {
-        "id": "5375d90d04356201",
+        "id": "f926e28127305d4a",
         "type": "tabs",
         "children": [
           {
-            "id": "b5ee1cfd79fbe5c6",
+            "id": "a58eb9efbb5ece68",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +39,7 @@
             }
           },
           {
-            "id": "26a1bcd708d7298b",
+            "id": "5c1dbac86b16b148",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -63,15 +54,7 @@
             }
           },
           {
-            "id": "0648efc1bbe5358b",
-            "type": "leaf",
-            "state": {
-              "type": "starred",
-              "state": {}
-            }
-          },
-          {
-            "id": "ea8cba864efd17e4",
+            "id": "c9c5228d522e5525",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -85,20 +68,19 @@
     "width": 300
   },
   "right": {
-    "id": "50970b2290d25653",
+    "id": "c604d812d8453d66",
     "type": "split",
     "children": [
       {
-        "id": "64c80d5c16afb952",
+        "id": "a0800e5b48e05943",
         "type": "tabs",
         "children": [
           {
-            "id": "15c058c8182caff2",
+            "id": "17b5cce2cabbd375",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SUMMARY.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,19 +92,18 @@
             }
           },
           {
-            "id": "3051015a7ba10d90",
+            "id": "14754bdbf230fab5",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SUMMARY.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "d4d89ec9c3c4cf09",
+            "id": "c605287776143f90",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -133,13 +114,11 @@
             }
           },
           {
-            "id": "8e57b9d7d708366f",
+            "id": "ab93eb864c4aeae5",
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "SUMMARY.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -159,83 +138,6 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b5ee1cfd79fbe5c6",
-  "lastOpenFiles": [
-<<<<<<< ours
-    "Web/Server",
-    "Web",
-    "_temp",
-    "Programing/Testing",
-    "Programing/rustrust_runner.md",
-    "Programing/rust_runner.md",
-    "Programrust_runner.md",
-    "Prorust_runner.md",
-    "Prust_runner.md",
-    "rust_runner.md",
-    "SUMMARY.md",
-    "Programing/rust/rust_runner.md",
-    "Programing/rust/packge.info",
-    "Programing/rust",
-    "Programing/python/packge.info",
-    "Programing/python",
-    "Programing/java/spring/packge.info",
-    "Programing/java/spring",
-    "Programing/java/packge.info",
-    "Middleware/elasticsearch.md",
-    "Middleware/MQ/rabbitmq.md",
-    "AI/GPT.md",
-    "_personal/ToolChain.md",
-    "Programing/PL/rust/rust_runner.md",
-    "OS/Windows/scoop.md",
-    "OS/Windows/wsl.md",
-    "OS/Linux/archlinux/usage.md",
-    "_others/language.md",
-    "_others_/language.md",
-    "OS/Linux/archli/usage.md",
-    "OS/Linux/usage.md",
-    "Wwsl.md",
-    "wsl.md",
-    "usage.md",
-    "scoop.md",
-    "OSwsl.md",
-    "_others/flowchart-2x.png"
-=======
-    "windows/wsl.md",
-    "windows/scoop.md",
-    "windows/scoop",
-    "wind",
-    "rust/rust_runner.md",
-    "mq/rabbitmq.md",
-    "mq",
-    "database/elasticsearch.md",
-    "database",
-    "configs/css/auto-number-title.css",
-    "configs/css",
-    "configs",
-    "Language.md",
-    "SUMMARY.md",
-    "personal/ToolChain.md",
-    "linux/archlinux/2023.md",
-    "others/Language.md",
-    "rust/RUNNER.md",
-    "rusr/RUNNER.md",
-    "rusr/RUN.md",
-    "rusr/Lan.md",
-    "rusr/Language.md",
-    "rusr",
-    "others/Langua",
-    "others/Lan",
-    "ai/GPT.md",
-    "().md",
-    "tmp/temp.md",
-    "temp.md",
-    "linx/temp.md",
-    "linux/temp.md",
-    "linux/archlin.md",
-    "linux/a.md",
-    "demo/demo_2.md",
-    "2023-02-16.md",
-    "demo/demo_1.md"
->>>>>>> theirs
-  ]
+  "active": "4f97af7bf382460b",
+  "lastOpenFiles": []
 }
