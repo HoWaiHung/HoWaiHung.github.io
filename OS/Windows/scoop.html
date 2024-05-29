@@ -160,18 +160,21 @@
 
                 <div id="content" class="content">
                     <main>
-                        <pre><code># 先添加用户级别的环境变量 SCOOP
+                        <pre><code># SET ENV FOR USER With SCOOP
 $env:SCOOP='D:\Scoop'
 [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User')
 $env:SCOOP_GLOBAL='D:\GlobalScoopApps'
 [environment]::setEnvironmentVariable('SCOOP_GLOBAL',$env:SCOOP_GLOBAL,'Machine')
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-#
+
+# Scoop Install 
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 # iwr -useb get.scoop.sh | iex
-#
+
+# Scoop Proxy
 # scoop config proxy 127.0.0.1:7890
-#
+
+# ADD bucket
 scoop bucket add extras
 scoop bucket add versions
 scoop bucket add java
@@ -179,12 +182,15 @@ scoop bucket add nonportable
 scoop bucket add nirsoft
 scoop bucket add nerd-fonts
 scoop bucket add dorado https://github.com/h404bi/dorado
-# global
+
+# Global App
 scoop install sudo -g
 scoop install aria2 -g
 scoop install 7zip -g
 scoop install git -g
 scoop install openssh -g
+
+# Generate script For install app 
 # (.*?) .*  --&gt;  $1
 fluent-terminal-np
 windows-terminal
@@ -201,10 +207,10 @@ innounp
 clink
 lua
 go
-graalvm
-graalvm-jdk11
-graalvm-jdk17
-jmeter
+# graalvm
+# graalvm-jdk11
+# graalvm-jdk17
+# jmeter
 jq
 maven
 # mingw
@@ -217,8 +223,11 @@ obsidian
 openjdk
 openjdk11
 openjdk17
+openjdk21
+# openjdk25
 oraclejdk
 oraclejre8
+oraclejdk-lts
 pandoc
 # perl
 postman
@@ -228,7 +237,7 @@ python27
 # resilio-sync-np
 # ruby
 rust
-utools
+# utools
 vscode
 wireshark
 # xmind
@@ -237,21 +246,63 @@ zotero
 # oh-my-posh
 # posh-git
 
+#
+another-redis-desktop-manager
+baidudisk
+Captura
+chromedriver
+chromium
+DBeaver
+dingtalk
+exiftool
+ffmpeg
+firefox
+gcc
+geckodriver
+googlechrome
+gzip
+idea
+LICEcap
+make
+mqttx
+netch
+neteasemusic
+notepadplusplus
+openssl
+# openvpn //-g
+# sharex
+# snipaste
+# sublime-text
+tabby
+# tar
+vargrant
+# 
+vcredist2022
+virtualbox-np
+virtualbox-with-extension-pack-np
+# 
+vlc
+vncviewer
+we-meet
+wechat
+wget
+WinDirStat
+winscp
+wps
+xz
+yarn
+#
 
 </code></pre>
 <pre><code>scoop install jetbrains-toolbox
 
-# 提示：By default all your tools are installed into 'D:\scoop\apps\jetbrains-toolbox\current\apps' folder and are persisted.This could be changed inside settings menu.
-
+# tips：By default all your tools are installed into 'D:\scoop\apps\jetbrains-toolbox\current\apps' folder and are persisted.This could be changed inside settings menu.
   
-
 scoop install vscode
 
 # Add Visual Studio Code as a context menu option by running: 'D:\scoop\apps\vscode\current\install-context.reg'
 
 # For file associations, run 'D:\scoop\apps\vscode\current\install-associations.reg'
-
-  
 
 scoop install gow vim Baidupcs-go aliyunpan hostcmd sourcetree
 
