@@ -160,154 +160,37 @@
 
                 <div id="content" class="content">
                     <main>
-                        <ul>
-<li>Install Docker on Windows (WSL) without Docker Desktop
-# https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9</li>
-</ul>
-<p>Install a Linux distro - Debian e.g.
-$USER means your username</p>
-<ol>
-<li>Configure a non-root user</li>
-</ol>
-<pre><code class="language-shell">cat /etc/shadow | grep $USER | cut -d: -f2
-</code></pre>
-<ol start="2">
-<li>Configure admin (sudo) access for the non-root user</li>
-</ol>
-<pre><code class="language-shell">usermod -aG sudo $USER
-# as root, make sure that the admin group (whether `sudo` or `wheel`) is enabled for sudo
-grep -E '%sudo|%wheel' /etc/sudoers
+                        <pre><code># Install Docker on Windows (WSL) without Docker Desktop
+# https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
+1.Configure a non-root user
+2.Configure admin (sudo) access for the non-root user
+3.Set default user
+when you launch WSL, you are still root, then set your new user as the default.
+4.Update/upgrade packages and test network connectivity
+- Network issues?
+5.Prepare for Docker installation
+- Remove residue
+- Install dependencies
+6.Install Docker
+- Add user to docker group
+- Sharing dockerd: choose a common ID for the docker group
+7.(Optionally) prepare a shared directory
+- Configure dockerd to use the shared directory
+8.Launch dockerd
+- Launch script for dockerd
+- Passwordless launch of dockerd
+- Make sure $DOCKER_HOST is always set
+- Running docker from Windows
+9.A note on bind mounts: stay on the Linux filesystem
 
-</code></pre>
-<ol start="3">
-<li>Set default user</li>
-</ol>
-<pre><code class="language-shell">printf "\n[user]\ndefault = $USER\n" | sudo tee -a /etc/wsl.conf
-# when you launch WSL, you are still root, then set your new user as the default.
-</code></pre>
-<ol start="4">
-<li>Update/upgrade packages and test network connectivity</li>
-</ol>
-<pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt upgrade
-</code></pre>
-<ul>
-<li>Network issues?</li>
-</ul>
-<pre><code class="language-shell">echo -e "[network]\ngenerateResolvConf = false" | sudo tee -a /etc/wsl.conf
-sudo unlink /etc/resolv.conf
-echo nameserver 1.1.1.1 | sudo tee /etc/resolv.conf
-</code></pre>
-<ol start="5">
-<li>Prepare for Docker installation</li>
-</ol>
-<ul>
-<li>Remove residue</li>
-</ul>
-<pre><code class="language-shell">sudo apt remove docker docker-engine docker.io containerd runc
-</code></pre>
-<ul>
-<li>Install dependencies</li>
-</ul>
-<pre><code class="language-shell">sudo apt install --no-install-recommends apt-transport-https ca-certificates curl gnupg2
-</code></pre>
-<ul>
-<li>Package repository configuration</li>
-</ul>
-<pre><code class="language-shell">`ID` will be either "ubuntu" or "debian", as appropriate, depending on what is in `/etc/os-release`.
-</code></pre>
-<pre><code class="language-shell">curl -fsSL https://download.docker.com/linux/${ID}/gpg | sudo tee /etc/apt/trusted.gpg.d/docker.asc
-#
-echo "deb [arch=amd64] https://download.docker.com/linux/${ID} ${VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/docker.list
-#
-sudo apt update
-</code></pre>
-<pre><code class="language-shell"># China
-curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/debian/gpg | sudo apt-key add -
-# 
-sudo echo  "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/debian ${VERSION_CODENAME} table" | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
-#
-sudo apt update
-</code></pre>
-<ol start="6">
-<li>Install Docker</li>
-</ol>
-<pre><code class="language-shell">sudo apt install docker-ce docker-ce-cli containerd.io
-</code></pre>
-<ul>
-<li>Add user to docker group</li>
-</ul>
-<pre><code class="language-shell">sudo usermod -aG docker $USER
-</code></pre>
-<ul>
-<li>Sharing dockerd: choose a common ID e.g.36257 for the docker group</li>
-</ul>
-<pre><code class="language-shell">sudo sed -i -e 's/^\(docker:x\):[^:]\+/\1:36257/' /etc/group
-#
-sudo groupmod -g 36257 docker
-</code></pre>
-<ol start="7">
-<li>(Optionally) prepare a shared directory</li>
-</ol>
-<pre><code class="language-shell">DOCKER_DIR=/mnt/wsl/shared-docker
-mkdir -pm o=,ug=rwx "$DOCKER_DIR"
-chgrp docker "$DOCKER_DIR"
-</code></pre>
-<ul>
-<li>Configure dockerd to use the shared directory</li>
-</ul>
-<pre><code class="language-shell"># /etc/docker/daemon.json
-{
-  "hosts": ["unix:///mnt/wsl/shared-docker/docker.sock"]
-}
-</code></pre>
-<ol start="8">
-<li>Launch dockerd</li>
-</ol>
-<ul>
-<li>Launch script for dockerd</li>
-</ul>
-<pre><code class="language-shell"># docker-service shell script
-DOCKER_DISTRO="Debian"
-DOCKER_DIR=/mnt/wsl/shared-docker
-DOCKER_SOCK="$DOCKER_DIR/docker.sock"
-export DOCKER_HOST="unix://$DOCKER_SOCK"
-if [ ! -S "$DOCKER_SOCK" ]; then
-    mkdir -pm o=,ug=rwx "$DOCKER_DIR"
-    chgrp docker "$DOCKER_DIR"
-    /mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd &lt; /dev/null &gt; $DOCKER_DIR/dockerd.log 2&gt;&amp;1"
-fi
-# default docker socket location of `/var/run/docker.sock`
-DOCKER_DISTRO="Debian"
-DOCKER_LOG_DIR=$HOME/docker_logs
-mkdir -pm o=,ug=rwx "$DOCKER_LOG_DIR"
-/mnt/c/Windows/System32/wsl.exe -d $DOCKER_DISTRO sh -c "nohup sudo -b dockerd &lt; /dev/null &gt; $DOCKER_LOG_DIR/dockerd.log 2&gt;&amp;1"
-</code></pre>
-<ul>
-<li>Passwordless launch of dockerd</li>
-</ul>
-<pre><code class="language-shell"># visudo
-%docker ALL=(ALL)  NOPASSWD: /usr/bin/dockerd
-</code></pre>
-<ul>
-<li>Make sure $DOCKER_HOST is always set</li>
-</ul>
-<pre><code class="language-shell"># script is already in your `.bashrc` or `.profile`
-DOCKER_SOCK="/mnt/wsl/shared-docker/docker.sock"
-test -S "$DOCKER_SOCK" &amp;&amp; export DOCKER_HOST="unix://$DOCKER_SOCK"
-</code></pre>
-<ul>
-<li>Running docker from Windows</li>
-</ul>
-<ol start="10">
-<li>A note on bind mounts: stay on the Linux filesystem</li>
-</ol>
-<p>Launch script For Docker With pwsh</p>
-<pre><code class="language-powershell"># ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+# Launch script For Docker With pwsh
+# ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+
 $DOCKER_DISTRO = "Debian"
 function docker {
     wsl -d $DOCKER_DISTRO docker -H unix:///mnt/wsl/shared-docker/docker.sock @Args
 }
-#
+
 function Docker-Service {
   Param ([string]$distro)
   $DOCKER_DIR = "/mnt/wsl/shared-docker"
@@ -318,35 +201,41 @@ function Docker-Service {
     wsl -d "$distro" sh -c "nohup sudo -b dockerd &lt; /dev/null &gt; $DOCKER_DIR/dockerd.log 2&gt;&amp;1"
   }
 }
+
+
 </code></pre>
-<pre><code class="language-powershell"># Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+<pre><code>
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
 
 # set Hyper-v
+
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
+  
 # set wsl2
+
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
   
-# set VM platform
+
+# VM platform
+
 Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
 
 
-# wsl2 command
-# wsl init
+# wsl2
+
 wsl --set-default-version 2
 
-# wsl update kernel
+# update kernel
+
 wsl --update
 
-# wsl shutdown
 wsl --shutdown
 
-# wsl export
 wsl --export ubuntu D:\wsl\ubuntu\ubuntu.tar
-wsl --export docker-desktop-data D:\wsl\docker-desktop-data\docker-desktop-data.tar
 
-# wsl import
-wsl --import D:\wsl\debian.tar
+wsl --export docker-desktop-data C:\wsl\docker-desktop-data\docker-desktop-data.tar
 
 </code></pre>
 
