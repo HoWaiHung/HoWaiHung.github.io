@@ -319,7 +319,8 @@ function Docker-Service {
   }
 }
 </code></pre>
-<pre><code class="language-powershell"># Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+<pre><code class="language-powershell"># ready for wsl
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # set Hyper-v
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
@@ -348,6 +349,117 @@ wsl --export docker-desktop-data D:\wsl\docker-desktop-data\docker-desktop-data.
 # wsl import
 wsl --import D:\wsl\debian.tar
 
+</code></pre>
+<pre><code class="language-shell"># /etc/vim/vimrc.tiny  To fix that arrow and backspace key does not work
+# nocompatibility mode
+set nocompatible
+
+set backspace=2
+</code></pre>
+<pre><code class="language-shell"># clean up docker
+# 查看最大空间占用目录  
+sudo du -h --exclude="mnt*" --exclude="proc*" -d 1 /  
+  
+# 清理 无用的volumes  
+docker volume prune  
+  
+# 删除无用的镜像和容器及构建缓存  
+docker system prune  
+# docker container prune  
+# docker image prune  
+# WARNING! This will remove:  
+#   - all stopped containers  
+#   - all networks not used by at least one container  
+#   - all dangling images  
+#   - all dangling build cache  
+# 删除不需要的镜像  
+docker images  
+docker rmi xxx
+
+</code></pre>
+<pre><code class="language-poweshell">
+# clean up wsl disk
+# powershell中执行  
+wsl --shutdown  
+diskpart  
+  
+# 打开新命令行窗口操作  
+  
+# Microsoft DiskPart 版本 10.0.19041.610  
+  
+# Copyright (C) Microsoft Corporation.  
+# 在计算机上: xxx  
+  
+DISKPART&gt; select vdisk file="C:\Users\用户名\AppData\Local\Packages\~\LocalState\ext4.vhdx"
+~ Ubuntu like CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc
+~ Debian like TheDebianProject.DebianGNULinux_76v4gfsz19hv4
+  
+# DiskPart 已成功选择虚拟磁盘文件。  
+  
+DISKPART&gt; compact vdisk  
+# 如果出现  
+# 虚拟磁盘服务错误: 所请求的操作需要以只读方式 连接虚拟磁盘。  
+# 则执行    
+# detach vdisk  
+# attach vdisk readonly  
+  
+#   100 百分比已完成  
+  
+# DiskPart 已成功压缩虚拟磁盘文件。  
+  
+DISKPART&gt;  detach vdisk
+</code></pre>
+<pre><code class="language-yaml"># wsl config
+# https://learn.microsoft.com/zh-cn/windows/wsl/wsl-config#configure-global-options-with-wslconfig
+
+[wsl2]  
+# 自定义 Linux 内核的绝对路径  
+kernel=&lt;path&gt;  
+# 给 WSL 2 虚拟机分配的内存大小  
+memory=&lt;size&gt;  
+# 为 WSL 2 虚拟机分配的处理器核心数量  
+processors=&lt;number&gt;  
+# 为 WSL 2 虚拟机分配的交换空间，0 表示没有交换空间  
+swap=&lt;size&gt;  
+# 自定义交换虚拟磁盘 vhd 的绝对路径  
+swapFile=&lt;path&gt;  
+# 是否允许将 WSL 2 的端口转发到主机（默认为 true）  
+localhostForwarding=&lt;bool&gt;  
+  
+# `&lt;path&gt;` 必须是带反斜杠的绝对路径，例如 `C:\\Users\\kernel`  
+# `&lt;size&gt;` 必须在后面加上单位，例如 8 GB 或 512 MB
+
+
+[experimental]
+autoProxy=false
+
+#[wsl2]
+#networkingMode=mirrored
+#dnsTunneling=true
+#firewall=true
+#autoProxy=true
+
+#[experimental]
+# requires dnsTunneling but are also OPTIONAL
+#bestEffortDnsParsing=true
+#useWindowsDnsCache=true
+
+#[wsl2]
+#nestedVirtualization=true
+#ipv6=true
+#[experimental]
+#autoMemoryReclaim=gradual # gradual | dropcache | disabled
+#networkingMode=mirrored
+#dnsTunneling=true
+#firewall=true
+#autoProxy=true
+
+#[experimental]
+#autoMemoryReclaim=gradual
+#networkingMode=mirrored
+#dnsTunneling=true
+#firewall=true
+#autoProxy=true
 </code></pre>
 
                     </main>
