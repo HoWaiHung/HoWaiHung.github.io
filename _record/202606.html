@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Demo_1 - 珑仞小记</title>
+        <title>202606 - 珑仞小记</title>
 
 
         <!-- Custom HTML head -->
@@ -155,25 +155,56 @@
 
                 <div id="content" class="content">
                     <main>
-                        <pre class="mermaid">    flowchart TD        
-    N0[&quot;TEST&quot;]
-    N1[&quot;DEMO&quot;]
-    N2[&quot;Node&quot;]
+                        <p>记一次云服务器被侵入修复记录</p>
+<pre><code> # 发现服务器服务挂了，有一个进程一直高cpu
+ ## 并且云安全检测发现可疑进程，以下就是可疑进程，对应上高占用的进程
+ sh -c /bin/softirq -randomx-1gb-pages -0 45.125.66.100:444 -u xxl -p 3cthDeQ5 -tis -0 45.94.31.89:443 -u xxl-p 3cthDeQ5 -tls -B
+ ## 同时发现一个可疑随机字符进程，实际还有父子进程 
+ ## 基本推测是被植入挖矿木马
 
+ # 检查一切有可能设置自启的服务
+ # systemd
+ # /etc/rc.d/init.d/
+ # /etc/cron.d
+ ## 均发现一个可疑程序服务名称，rondo
+ ## 搜索全文件一切相关名称，最近被修改的bin目录程序  
+ find / -name 'rondo*'
 
-    N0--data--&gt;N1
-      
-</pre>
+# 发现无法删除移动目标文件，lsattr确认文件属性，有ia则无法移动删除
+# 进一步确认恶意程序删除相关程序阻碍修复问题，包括crontab和chattr被删除
+# 并且无法通过passwd修改root密码
+
+# 首要确认ssh设置等有无被修改，写入可疑key，确认无误后修改root密码，封禁相关外部ip
+## 发现passwd命令无效直接Killed，直接通过修改/etc/shadow的密文来修改（linux系统一切基于文件！）
+## 后续清除相关程序后，passwd命令恢复正常，推测是该恶意程序会在内存干扰直接杀掉passwd
+
+ # 检查systemd
+	 systemctl list-units --type=service
+ # 检查rc
+	 chkconfig --list
+ # 检查crontab
+	 /etc/cron.d 
+	 /var/spool/cron
+	 
+# 检查可疑进程
+pstree -ap 进程ID
+pkill 可疑进程名
+ps -p 进程ID -o pid,ppid,cmd,%mem,%cpu,start_time
+
+# 重装chattr软件
+	yum reinstall e2fsprogs
+
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../_tmp/temp.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../Person/Personal.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../_demo/demo_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../OS/Linux/archlinux/usage.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -183,11 +214,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../_tmp/temp.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../Person/Personal.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../_demo/demo_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../OS/Linux/archlinux/usage.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
