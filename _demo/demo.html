@@ -155,7 +155,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <pre class="mermaid">    flowchart TD        
+                        <style>
+  :root {
+    --red: #ff0000;
+    --blue: #0000ff;
+    --highlight-yellow: #ffff0033; /* 33 是透明度 */
+  }
+  .text-red { color: var(--red); }
+  .highlight { background-color: var(--highlight-yellow); }
+</style>
+<p>这是一段<span class="text-red">红色文字</span>，<br />
+这是<span class="highlight">高亮内容</span>。</p>
+<p><span class="text-red">红色文字</span>
+<span class="highlight">高亮内容</span></p>
+<pre class="mermaid">    flowchart TD        
     N0[&quot;TEST&quot;]
     N1[&quot;DEMO&quot;]
     N2[&quot;Node&quot;]
@@ -164,6 +177,12 @@
     N0--data--&gt;N1
       
 </pre>
+<pre><code class="language-text">这是一段&lt;span class="text-red"&gt;红色文字&lt;/span&gt;，  
+这是&lt;span class="highlight"&gt;高亮内容&lt;/span&gt;
+&lt;span class="text-red"&gt;红色文字&lt;/span&gt;
+&lt;span class="highlight"&gt;高亮内容&lt;/span&gt;
+。
+</code></pre>
 
                     </main>
 

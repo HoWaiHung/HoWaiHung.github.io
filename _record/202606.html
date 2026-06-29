@@ -155,7 +155,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>记一次云服务器被侵入修复记录</p>
+                        <p>记一次云服务器被侵入修复记录
+<span style="color: red;">rondo木马</span></p>
 <pre><code> # 发现服务器服务挂了，有一个进程一直高cpu
  ## 并且云安全检测发现可疑进程，以下就是可疑进程，对应上高占用的进程
  sh -c /bin/softirq -randomx-1gb-pages -0 45.125.66.100:444 -u xxl -p 3cthDeQ5 -tis -0 45.94.31.89:443 -u xxl-p 3cthDeQ5 -tls -B
@@ -175,7 +176,8 @@
 # 并且无法通过passwd修改root密码
 
 # 首要确认ssh设置等有无被修改，写入可疑key，确认无误后修改root密码，封禁相关外部ip
-## 发现passwd命令无效直接Killed，直接通过修改/etc/shadow的密文来修改（linux系统一切基于文件！）
+## 发现passwd命令无效直接Killed，直接通过修改/etc/shadow的密文来修改 
+## linux系统一切基于文件！
 ## 后续清除相关程序后，passwd命令恢复正常，推测是该恶意程序会在内存干扰直接杀掉passwd
 
  # 检查systemd
