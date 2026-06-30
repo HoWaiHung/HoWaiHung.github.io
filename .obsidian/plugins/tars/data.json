@@ -1,0 +1,48 @@
+{
+  "editorStatus": {
+    "isTextInserting": false
+  },
+  "providers": [
+    {
+      "tag": "SiliconFlow",
+      "vendor": "SiliconFlow",
+      "options": {
+        "apiKey": "sk-udkefzjcwlreqmhbuhsbvyatyeqpzfuadvmteavimebaaevb",
+        "baseURL": "https://api.siliconflow.cn/v1",
+        "model": "Qwen/Qwen3-VL-8B-Thinking",
+        "parameters": {
+          "enable_search": true
+        }
+      }
+    }
+  ],
+  "systemTags": [
+    "System",
+    "系统"
+  ],
+  "newChatTags": [
+    "NewChat",
+    "新对话"
+  ],
+  "userTags": [
+    "UserMe"
+  ],
+  "roleEmojis": {
+    "assistant": "✨",
+    "system": "🔧",
+    "newChat": "🚀",
+    "user": "💬"
+  },
+  "promptTemplates": [],
+  "enableInternalLink": true,
+  "enableInternalLinkForAssistantMsg": false,
+  "answerDelayInMilliseconds": 2000,
+  "confirmRegenerate": true,
+  "enableTagSuggest": true,
+  "tagSuggestMaxLineLength": 25,
+  "enableExportToJSONL": false,
+  "enableReplaceTag": false,
+  "enableDefaultSystemMsg": false,
+  "defaultSystemMsg": "",
+  "enableStreamLog": false
+}
