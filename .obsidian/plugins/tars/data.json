@@ -9,7 +9,7 @@
       "options": {
         "apiKey": "sk-udkefzjcwlreqmhbuhsbvyatyeqpzfuadvmteavimebaaevb",
         "baseURL": "https://api.siliconflow.cn/v1",
-        "model": "Qwen/Qwen3-VL-8B-Thinking",
+        "model": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
         "parameters": {
           "enable_search": true
         }
