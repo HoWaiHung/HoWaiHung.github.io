@@ -313,13 +313,13 @@ def hello_world():
 [任务描述]</li>
 </ul>
 <hr />
-<pre class="mermaid">// 可选的甘特图/序列图/时序图（Mermaid语法）
+<pre class="mermaid">%% 可选的甘特图/序列图/时序图（Mermaid语法）
 gantt
     title 项目时间轴
     dateFormat  YYYY-MM-DD
     section 研发阶段
-    概念验证       ：a1, 2024-05-01, 7d
-    集成测试       ：a2, after a1, 5d
+	概念验证: a1, 2024-05-01, 7d
+	集成测试: a2, after a1, 5d
 </pre>
 <hr />
 <h2 id="-摘要回顾"><a class="header" href="#-摘要回顾">💎 摘要回顾</a></h2>
@@ -341,7 +341,91 @@ gantt
 
 如需嵌入其他内容（如待办事项库），可使用适合 Obsidian 的「插件Togglz」或「块编辑器」功能扩展。系统仅输出模板内容，无附加功能支持。
 
-是否需要为特定技术栈（如算法/数据库/前端）生成细化模板？                                  </code></pre>
+是否需要为特定技术栈（如算法/数据库/前端）生成细化模板？   
+
+</code></pre>
+<p>#UserMe : mermaid的甘特图语法</p>
+<p>#SiliconFlow :</p>
+<blockquote>
+<p>[!quote]-</p>
+<p>嗯，用户现在询问的是mermaid甘特图语法的具体用法。看来ta对之前提供的技术文档模板中的可视化部分很感兴趣，可能正在尝试在Obsidian笔记中整合mermaid图表。</p>
+<p>用户之前已经连续询问过日期、自我介绍，然后突然转向技术文档模板，现在又聚焦到mermaid语法，这种跳跃式的提问挺典型的Obsidian用户行为——他们通常需要先建立基础模板框架，再填充具体工具的使用方法。用户应该是个正在搭建个人知识库的中级Obsidian使用者，技术认知水平不错但需要明确的语法示例。</p>
+<p>在准备回复时，我需要特别注意几点：第一，给出的语法示例必须能直接复制粘贴运行；第二，要保留之前文档中的mermaid经典模式demo；第三，考虑到用户可能常用Obsidian，得提到插件支持和常见错误提示。最好用环节分解的方式讲解，就像之前文档模板那种模块化风格，但这次要用mermaid表达出来。</p>
+<p>用户可能没说出来但真正需要的是：既能快速复制粘贴语法，又理解参数含义。所以除了例图，还得补充几个常见参数的说明，比如默认单位、日期格式这些容易踩坑的地方。</p>
+<p>对了，之前文档提到过甘特图的甘特特性，比如默认自动分段，这点对Obsidian用户特别有用，要明确标注出来。用户做知识管理的话，这个隐藏特性可能比示例更重要。</p>
+</blockquote>
+<p>以下是完整的 <strong>Mermaid 甘特图语法</strong>说明及示例，支持直接复制粘贴到支持 Mermaid 的编辑器中渲染：</p>
+<hr />
+<h1 id="-mermaid-甘特图语法模板"><a class="header" href="#-mermaid-甘特图语法模板">🛠️ Mermaid 甘特图语法模板</a></h1>
+<pre class="mermaid">gantt
+    title [项目名称] 甘特图示例  
+    dateFormat  YYYY-MM-DD  
+    axisFormat %b %d  （X轴时间格式）  
+    section 主要阶段  
+    需求分析       ：crit， a1， 2024-05-01， 2024-05-10  
+    系统设计       ：         after a1， 2024-05-15， 15d  
+    编码实现       ：crit， 2024-05-20，    20d  
+    section 交付阶段  
+    单元测试       ：2024-06-01， 5d  
+
+---
+
+## 📌 关键说明  
+
+### ⚙️ 语法结构  
+</pre>
+<p>gantt<br />
+title 甘特图标题<br />
+dateFormat 时间格式⚙️<br />
+axisFormat X轴显示格式📅<br />
+section 自定义阶段名称<br />
+任务名称 ：stylecode, start_date, duration/duration</p>
+<pre><code>
+### 💡 参数说明  
+1. **dateFormat**  
+   - `YYYY-MM-DD`（年月日）  
+   - `YYYY-MM`（年月）  
+   - `MMM D`（简写月日）  
+
+2. **任务定义**  
+   - 语法：`任务名称 ：stylecode，启动时间，时长`  
+   - `crit`：关键路径任务（用红色显示🔔）  
+   - `after 相邻任务ID`：依赖关系  
+   - `duration`：可以是：  
+     - `dd`: 天数  
+     - `mm`: 月数（默认）  
+     - `w`: 周数  
+     - `YYYY-MM-DD`：具体日期  
+
+3. **自定义样式**  
+   - `gapDistance: 100px`：时间轴间距  
+
+---
+
+# 📊 示例扩展  
+
+## 例图生成指令  
+</code></pre>
+<p>gantt<br />
+title 代码开发计划<br />
+dateFormat  YYYY-MM-DD<br />
+section 前期阶段<br />
+需求评审       ：active， a1， 2024-05-01， 1d<br />
+流程设计       ：         after a1， 2024-05-03， 3d<br />
+section 后期阶段<br />
+代码合并       ：crit,    2024-05-07， 7d</p>
+<pre><code>
+&gt; 🔍 刷新提示：渲染前需确保安装支持 Mermaid 的插件（如Obsidian自带或Graphviz插件），中文需使用UTF-8编码。
+
+---
+
+## 💎 高阶技巧  
+- 内联任务名（双写时可避免换行）  
+- 添加里程碑指示器：`Milestone`  
+- 叠加多个图表：使用`subgantt`子图模式
+
+需要哪种具体类型的甘特图（如项目管理/代码迭代/技能树）？ 我可为你定制范例 🧰。
+</code></pre>
 
                     </main>
 
