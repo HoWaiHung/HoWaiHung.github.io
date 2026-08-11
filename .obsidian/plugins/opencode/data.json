@@ -1,0 +1,7 @@
+{
+  "opencodePath": "opencode",
+  "defaultWorkingDirectory": "",
+  "terminalFontSize": 14,
+  "terminalFontFamily": "monospace",
+  "newSessionArgs": "--model opencode/deepseek-v4-flash-free"
+}
